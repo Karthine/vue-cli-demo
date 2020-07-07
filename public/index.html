@@ -121,6 +121,8 @@ ejs模板引擎 EJS是一个JavaScript库(https://ejs.bootcss.com/)，EJS可以�
     <!--  Object.assign()方法的兼容版本   -->
     <script crossorigin="anonymous" type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/polyfill/index.js?v=<%=htmlWebpackPlugin.options.getTime%>"></script>
     <script type="text/javascript">
+
+      // todo 检测该浏览器是否支持localStorage（因为sessionStorage 和 localStorage都是H5新特性，只要检测一个即可 ）
       function isLocalStorageSupported() {
         var testKey = 'test',
           storage = window.sessionStorage;
@@ -145,6 +147,7 @@ ejs模板引擎 EJS是一个JavaScript库(https://ejs.bootcss.com/)，EJS可以�
       function loadLizardScript () {
         if (isLocalStorageSupported()) {
           // 什么时候setItem('/webapp-static/lizard/index.js')的？
+          // 在 App.vue中调用了 getLizardCode方法，请求了/webapp-static/lizard/index.js资源并写入了localStorage.js文件中
           var results = localStorage.getItem('/webapp-static/lizard/index.js');
           if (results && typeof results == 'string') {
             var res = JSON.parse(results);
