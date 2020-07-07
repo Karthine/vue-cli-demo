@@ -6,8 +6,9 @@
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
-    "start": "npm run dev",
-    "build": "node build/build.js"
+    "ztdev": "vue-cli-service build --mode ztdev",
+    "test": "vue-cli-service build --mode test",
+    "prod_hw": "vue-cli-service build --mode prod_hw"
   },
   "dependencies": {
     "pubsub-js": "^1.8.0",

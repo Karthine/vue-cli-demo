@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--
+ejs模板引擎 EJS是一个JavaScript库(https://ejs.bootcss.com/)，EJS可以同时运行在客户端和服务器端
+<%=  %> 输出标签（原文输出HTML标签）
+比如说 <%= user.name %> ：获取值 假如user.name = Job，里面的值替换 的结果为Job
+即： <%= user.name %>  <==> Job
+-->
+<html data-time="<%= htmlWebpackPlugin.options.getTime%>">
+  <head>
+    <!--  charset 属性，meta 元素是一个字符集声明，告诉文档使用哪种字符编码。   -->
+	  <meta charset="utf-8">
+    <!-- http-equiv 属性，meta 元素则是编译指令，提供的信息与类似命名的HTTP头部相同。   -->
+    <!-- DNS Prefetch，即DNS预获取  是前端优化的一部分。一般来说，在前端优化中与 DNS 有关的有两点： 一个是减少DNS的请求次数，另一个就是进行DNS预获取  -->
+    <!-- DNS Prefetching 是让具有此属性的域名不需要用户点击链接就在后台解析，而域名解析和内容载入是串行的网络操作，所以这个方式能 减少用户的等待时间，提升用户体验 。   -->
+    <!-- DNS Prefetch 应该尽量的放在网页的前面，推荐放在 <meta charset="UTF-8"> 后面。具体使用方法如下：-->
+
+    <!-- 参考链接 https://blog.csdn.net/qq_39207948/article/details/80615432	 -->
+	  <meta http-equiv="x-dns-prefetch-control" content="on"/>
+
+    <!--  htmlWebpackPlugin.option 读取的是webpack.dev.conf.js文件中HtmlWebpackPlugin所有的配置项 -->
+    <!--<%=  htmlWebpackPlugin.options.staticPath %> 读取的是webpack.dev.conf.js文件中HtmlWebpackPlugin配置项中的staticPath字段   -->
+    <!--  staticPath: process.env.VUE_APP_STATIC_PATH  事实上读取的是环境变量中的VUE_APP_STATIC_PATH变量-->
+    <!-- VUE_APP_STATIC_PATH变量的值，由启动的哪个环境的脚本决定，即packeage.json文件中的scripts脚本 dev/ztdev/test/prod_hw各个环境的文件中VUE_APP_STATIC_PATH的值决定-->
+    <!-- 以npm run dev为例子， ==> vue-cli-service serve --mode development   ===> 找.env.development文件中VUE_APP_STATIC_PATH变量 ==》 https://static.test.laiyifen.com  -->
+    <!-- 对 https://static.test.laiyifen.com 链接进行DNS预获取    -->
+	  <link rel="dns-prefetch" href="<%= htmlWebpackPlugin.options.staticPath %>"/>
+
+
+    <!-- 以下4个都是为了不使用缓存 参考连接https://www.cnblogs.com/fan-xiaofan/p/6028194.html    -->
+    <!-- Cache-Control 通用消息头字段，被用于在http请求和响应中，通过指定指令来实现缓存机制。缓存指令是单向的，这意味着在请求中设置的指令，不一定被包含在响应中	  -->
+    <!--  参考链接：https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Cache-Control  -->
+    <!-- no-store 缓存不应存储有关客户端请求或服务器响应的任何内容，即不使用任何缓存。   -->
+    <!--   pragma与no-cache用于定义页面缓存,不缓存页面  -->
+    <meta http-equiv="cache-control" content="no-store">
+	  <meta http-equiv="cache-control" content="no-cache">
+	  <meta http-equiv="expires" content="0">
+	  <meta http-equiv="pragma" content=no-cache>
+
+    <!-- 主要作用是是否设置自动将你的数字转化为拨号连接。 telephone=no 禁止把数字转化为拨号链接；telephone=yes 开启把数字转化为拨号链接，默认开启-->
+	  <meta content="telephone=no" name="format-detection">
+    <!-- <metaname="applicable-device"content="mobile"/>告知浏览器本页面是移动端的页面   -->
+    <!--  "content="pc" 告知浏览器本页面是pc端的页面  -->
+    <!--  content="pc,mobile" 告知浏览器本网页是自适应的页面。-->
+	  <meta name="applicable-device"content="mobile">
+
+    <!--  为移动Safari设置“主屏幕”图标名称 -->
+    <!-- 默认情况下，当将网站标记为图标时（通过从Safari的“+”菜单中选择添加到主屏幕），图标名称默认为该页面，截断为12个字符 -->
+	  <meta name="apple-mobile-web-app-title" content="来伊份">
+    <!--  对于android设备  -->
+    <meta name="application-name" content="来伊份">
+
+
+    <!-- 参考链接https://www.cnblogs.com/aimyfly/p/4432121.html   -->
+    <!--  这meta的作用就是删除默认的苹果工具栏和菜单栏。content有两个值”yes”和”no”,当我们需要显示工具栏和菜单栏时，这个行meta就不用加了，默认就是显示  -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--    “apple-mobile-web-app-status-bar-style”作用是控制状态栏显示样式-->
+	  <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <!-- https://www.crifan.com/html_meta_theme_color_meaning/  顶栏header bar和地址栏address bar的多彩的颜色  -->
+	  <meta name="theme-color" content="#ff6900">
+    <!--  <link rel="stylesheet" href="域名/webapp-static/css/main.css?时间戳">  -->
+    <link rel="stylesheet" href="<%=htmlWebpackPlugin.options.staticPath%>/webapp-static/css/main.css?v=<%=htmlWebpackPlugin.options.getTime%>">
+    <!-- 图标 <link rel="apple-touch-icon-precomposed" href="域名/webapp-static/images/touch-icon-iphone.png"  -->
+
+    <!-- 以下三个都是和页面图标，ICON相关    -->
+	  <link rel="apple-touch-icon-precomposed" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
+	  <link rel="apple-touch-startup-image" href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" />
+    <!-- 使用link rel="shortcut icon"为网页标题加图标    -->
+	  <link href="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/images/touch-icon-iphone.png" rel="Shortcut Icon" type="image/x-icon" />
+
+    <!--  视口   -->
+	  <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+    <title>加载中...</title>
+	  <script type="text/javascript">
+      (function (win,doc) {
+        var flex = function flex() {
+          var ua = navigator.userAgent;
+          var matches = ua.match(/Android[\S\s]+AppleWebkit\/(\d{3})/i);
+          var UCversion = ua.match(/U3\/((\d+|\.){5,})/i);
+          var isUCHd = UCversion && parseInt(UCversion[1].split('.').join(''), 10) >= 80;
+          var isIos = navigator.appVersion.match(/(iphone|ipad|ipod)/gi);
+          var dpr = win.devicePixelRatio || 1;
+          if (!isIos && !(matches && matches[1] > 534) && !isUCHd) {
+            // 如果非iOS, 非Android4.3以上, 非UC内核, 就不执行高清, dpr设为1;
+            dpr = 1;
+          }
+          var scale =  1 / dpr;
+          var metaEl = doc.querySelector('meta[name="viewport"]');
+          if (!metaEl) {
+            metaEl = doc.createElement('meta');
+            metaEl.setAttribute('name', 'viewport');
+            doc.head.appendChild(metaEl);
+          }
+          var docElement = doc.documentElement;
+          var clientWidth = docElement.getBoundingClientRect ? docElement.getBoundingClientRect().width : docElement.clientWidth;
+
+          var docFontSize = 50 + 'px'
+          if (clientWidth <= 1200) {
+            // todo  移动端适配
+            // 当clientWidth = 750, dpr=1的情况下 docFontSize = 750 * 1 /7.5 = 100px 即根元素的大小是100px，因为rem单位是相对于根元素的故1rem = 100px
+            // 在写页面样式的情况下，通常将设计稿的大小调成750px，然后在写样式
+            docFontSize = (clientWidth * dpr) / 7.5 + 'px';
+            if (clientWidth < 375 && !isIos && dpr <= 2) {
+              docFontSize = (clientWidth * dpr * 1.04167) / 7.5 + 'px';
+            }
+          }
+          metaEl.setAttribute('content', 'width=device-width,user-scalable=no,initial-scale=' + scale + ',maximum-scale=' + scale + ',minimum-scale=' + scale + ',viewport-fit=cover');
+          docElement.style.fontSize = docFontSize;
+        };
+        flex();
+      })(window,document);
+	  </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script type="text/javascript">
+      if ('serviceWorker' in navigator && location.protocol == 'https:') {
+        navigator.serviceWorker.register('/webapp-static/serviceWorker.js?v=<%=htmlWebpackPlugin.options.getTime%>',{scope: '/webapp/'})
+      }
+    </script>
+    <!--  Object.assign()方法的兼容版本   -->
+    <script crossorigin="anonymous" type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/polyfill/index.js?v=<%=htmlWebpackPlugin.options.getTime%>"></script>
+    <script type="text/javascript">
+      function isLocalStorageSupported() {
+        var testKey = 'test',
+          storage = window.sessionStorage;
+        try {
+          storage.setItem(testKey, 'testValue');
+          storage.removeItem(testKey);
+          return true;
+        } catch (error) {
+          return false;
+        }
+      };
+
+      function appendScript (res) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.appendChild(document.createTextNode(res));
+        document.head.appendChild(script);
+      };
+      function writeLizard () {
+        document.write('<script crossorigin="anonymous" type="text/javascript" src="<%=htmlWebpackPlugin.options.staticPath %>/webapp-static/lizard/index.js"><\/script>');
+      };
+      function loadLizardScript () {
+        if (isLocalStorageSupported()) {
+          // 什么时候setItem('/webapp-static/lizard/index.js')的？
+          var results = localStorage.getItem('/webapp-static/lizard/index.js');
+          if (results && typeof results == 'string') {
+            var res = JSON.parse(results);
+            if (res && res.times > new Date().getTime()) {
+              appendScript(res.results);
+            } else {
+              writeLizard();
+            }
+          } else {
+            writeLizard();
+          }
+        } else {
+          writeLizard();
+        }
+      };
+    loadLizardScript();
+    </script>
+
+<!--    todo 页面调试工具 -->
+<!-- <script type="text/javascript" src="<%= htmlWebpackPlugin.options.staticPath %>/webapp-static/vconsole/index.js"></script>
+    <script>
+      var vConsole = new VConsole()
+    </script>  -->
+  </body>
+</html>
