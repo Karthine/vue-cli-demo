@@ -10,6 +10,7 @@ import About from '@/components/newsMessageComponents/About'
 import News from '@/components/newsMessageComponents/News'
 import Message from '@/components/newsMessageComponents/Message'
 import User from '@/components/user'
+import Search from '@/components/search'
 
 export default new Router({
   mode:'history',
@@ -51,6 +52,10 @@ export default new Router({
       path:'/user/:id',
       component:User,
 
+    },
+    {
+      path:'/search',
+      component:Search
     }
   ]
 })

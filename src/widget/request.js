@@ -6,13 +6,13 @@ import config from '@/config/index'
 function clearStorage () {
   const currentTime = new Date().getTime()
   let cacheStorage = localStorage
-  if (!utils.isLocalStorageSupported()) { 
+  if (!utils.isLocalStorageSupported()) {
     cacheStorage = window.name
   }
   if (cacheStorage) {
     Object.keys(cacheStorage).forEach((item) => {
       const cacheData = store.get(item,'local')
-      if (cacheData && 
+      if (cacheData &&
         cacheData.times
       ) {
         if (currentTime > cacheData.times) {

@@ -4,6 +4,7 @@
  */
 
 export default function ajax ({
+  //属性返回URL的协议，主机名和端口号
   hostPath = location.origin,
   url,
   async = true,
@@ -13,12 +14,13 @@ export default function ajax ({
   dataType,
   data
 }){
-    
+
   return new Promise((resolve, reject) => {
 
     const xhr = new XMLHttpRequest()
 
-    xhr.open(type, hostPath + url, async)
+    // xhr.open(type, hostPath + url, async)
+    xhr.open(type,  url, async)
 
     xhr.timeout = timeout
 
